@@ -89,13 +89,13 @@ function collisionDetection() {
 
 function drawScore() {
     ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#e8a668";
     ctx.fillText("Score: "+score, 8, 20);
 }
 
 function drawLives() {
     ctx.font = "16px Arial";
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#e8a668";
     ctx.fillText("Lives: "+lives, canvas.width-65, 20);
 }
 
@@ -117,11 +117,12 @@ function drawBricks() {
                 bricks[c][r].y = brickY;
                 ctx.beginPath();
                 ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                ctx.fillStyle = gradientBricks(brickWidth, brickHeight, brickX, brickY)
                 // ctx.fillStyle = '#00FFFF';
-                let red = 255 * (c / r);
-                let green = 255 * (r / c);
-                let blue = (c * r);
-                ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;//not working...
+                // let red = 255 * (c / r);
+                // let green = 255 * (r / c);
+                // let blue = (c * r);
+                // ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;//not working...
                 ctx.fill(); //https://github.com/Make-School-Courses/FEW-1.2-JavaScript-Foundations/tree/master/class-02
                 ctx.closePath();
             }
@@ -132,9 +133,32 @@ function drawBricks() {
 function drawBall(){
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "#0C1247";
+    ctx.fillStyle = "#773f3f";
     ctx.fill();
     ctx.closePath();
+}
+
+function drawBackground(){
+// Create gradient
+var grd = ctx.createLinearGradient(0, 0, 0, canvas.height);
+grd.addColorStop(0, "#45a5aa");
+grd.addColorStop(1, "#4f7b8a");
+
+// Fill with gradient
+ctx.fillStyle = grd;
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function gradientBricks(bW, bH, x, y){
+// Create gradient
+var grd = ctx.createLinearGradient(0, 0, canvas.width, 0);
+grd.addColorStop(0, "#e8a668");
+grd.addColorStop(1, "#cf5d3a");
+
+// Fill with gradient
+// ctx.fillStyle = grd;
+// ctx.fillRect(x, y, bW, bH);
+return grd;
 }
 
 function draw() {
@@ -150,7 +174,7 @@ function draw() {
     }
 
 
-
+    drawBackground();
     drawBall();
     drawBricks();
     drawPaddle();
