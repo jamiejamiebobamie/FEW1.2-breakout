@@ -7,6 +7,9 @@ document.addEventListener("keyup", keyUpHandler, false);
 var x = canvas.width/2;
 var y = canvas.height-30;
 
+
+var score = 0;
+
 var dx = 2;
 var dy = -2;
 
@@ -61,10 +64,22 @@ function collisionDetection() {
                 if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
                     dy = -dy;
                     b.status = 0;
+                    score++;
+                    if(score == brickRowCount*brickColumnCount) {
+                        alert("YOU WIN, CONGRATULATIONS!");
+                        document.location.reload();
+                        clearInterval(interval); // Needed for Chrome to end game
+                    }
                 }
             }
         }
     }
+}
+
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#0095DD";
+    ctx.fillText("Score: "+score, 8, 20);
 }
 
 function drawPaddle() {
@@ -116,6 +131,7 @@ function draw() {
     drawBall();
     drawBricks();
     drawPaddle();
+    drawScore();
     collisionDetection();
 
     if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
