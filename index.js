@@ -38,6 +38,10 @@ for(var c=0; c<brickColumnCount; c++) {
         bricks[c][r] = { x: 0, y: 0, status: 1 };
     }
 }
+//
+// var grd = ctx.createLinearGradient(startX, startY, endX, endY);
+// grd.addColorStop(0, 'red');   // Places a color at the start
+// grd.addColorStop(1, 'white');  // Places a color at the end
 
 function keyDownHandler(e) {
     if(e.key == "Right" || e.key == "ArrowRight") {
@@ -134,6 +138,8 @@ function drawBall(){
 }
 
 function draw() {
+    // ctx.fillStyle = grd;
+    // ctx.fillRect(x, y, width, height);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     if(rightPressed && paddleX < canvas.width-paddleWidth) {
