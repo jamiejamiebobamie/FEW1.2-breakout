@@ -8,7 +8,6 @@ document.addEventListener("mousemove", mouseMoveHandler, false);
 var x = canvas.width/2;
 var y = canvas.height-30;
 
-
 var score = 0;
 var lives = 3;
 
@@ -99,25 +98,29 @@ function drawLives() {
 function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#008000";
     ctx.fill();
     ctx.closePath();
 }
 
 function drawBricks() {
-    for(var c=0; c<brickColumnCount; c++) {
-        for(var r=0; r<brickRowCount; r++) {
+    for(let c=0; c<brickColumnCount; c++) {
+        for(let r=0; r<brickRowCount; r++) {
             if(bricks[c][r].status == 1) {
-                            var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
-                            var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
-                            bricks[c][r].x = brickX;
-                            bricks[c][r].y = brickY;
-                            ctx.beginPath();
-                            ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                            ctx.fillStyle = "#0095DD";
-                            ctx.fill();
-                            ctx.closePath();
-                        }
+                var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+                var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop; //ReferenceError: Cannot access uninitialized variable.
+                bricks[c][r].x = brickX;
+                bricks[c][r].y = brickY;
+                ctx.beginPath();
+                ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                // ctx.fillStyle = '#00FFFF';
+                let red = 255 * (c / r);
+                let green = 255 * (r / c);
+                let blue = (c * r);
+                ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;//not working...
+                ctx.fill(); //https://github.com/Make-School-Courses/FEW-1.2-JavaScript-Foundations/tree/master/class-02
+                ctx.closePath();
+            }
         }
     }
 }
@@ -125,7 +128,7 @@ function drawBricks() {
 function drawBall(){
     ctx.beginPath();
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "#0095DD";
+    ctx.fillStyle = "#0C1247";
     ctx.fill();
     ctx.closePath();
 }
