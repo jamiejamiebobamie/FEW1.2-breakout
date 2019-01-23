@@ -139,14 +139,23 @@ function drawBall(){
 }
 
 function drawBackground(){
-// Create gradient
-var grd = ctx.createLinearGradient(0, 0, 0, canvas.height);
-grd.addColorStop(0, "#45a5aa");
-grd.addColorStop(1, "#4f7b8a");
+// // Create gradient
+// var grd = ctx.createLinearGradient(0, 0, 0, canvas.height);
+// grd.addColorStop(0, "#45a5aa");
+// grd.addColorStop(1, "#4f7b8a");
+//
+// // Fill with gradient
+// ctx.fillStyle = grd;
+// ctx.fillRect(0, 0, canvas.width, canvas.height); //code for background gradient
 
-// Fill with gradient
-ctx.fillStyle = grd;
-ctx.fillRect(0, 0, canvas.width, canvas.height);
+for (let i = 0; i < 10; i++){
+    ctx.fillStyle = `hsl(${360 / 10 * i}, 100%, 50%)`
+    ctx.fillRect((canvas.width/10)*i, 0, 49, canvas.height);
+    }
+    ctx.fillStyle = '#ff00ff44';
+    ctx.beginPath();
+    ctx.arc(canvas.width/2, canvas.height, 100, 0, 2 * Math.PI);
+    ctx.fill();
 }
 
 function gradientBricks(bW, bH, x, y){
