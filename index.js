@@ -172,14 +172,17 @@ function drawBackground(){
     // ctx.arc(canvas.width/2, canvas.height/2, 50, 0, 2 * Math.PI);
     // ctx.fill(); //target logo
 
+    for (let i = 0; i < 10; i++){
+        ctx.fillStyle = `hsl(${360 / 10 * i}, 100%, 50%)`
+        ctx.fillRect((canvas.width/10)*i, 0, 49, canvas.height);
+        }       //code for background colored rectangles
+
     for (let c = 0; c < 10; c++){
         ctx.beginPath();
         ctx.fillStyle = `hsl(${360 / 10 * c}, 100%, 50%)`
         ctx.arc(canvas.width/2, canvas.height, 200-(c*20), 0, 2 * Math.PI);
         ctx.fill();
         }
-
-
 }
 
 function gradientBricks(bW, bH, x, y){
