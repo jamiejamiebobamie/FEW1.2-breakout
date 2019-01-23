@@ -148,13 +148,14 @@ function drawBackground(){
 // ctx.fillStyle = grd;
 // ctx.fillRect(0, 0, canvas.width, canvas.height); //code for background gradient
 
-for (let i = 0; i < 10; i++){
-    ctx.fillStyle = `hsl(${360 / 10 * i}, 100%, 50%)`
-    ctx.fillRect((canvas.width/10)*i, 0, 49, canvas.height);
-    }
-    ctx.fillStyle = '#ff00ff44';
+// for (let i = 0; i < 10; i++){
+//     ctx.fillStyle = `hsl(${360 / 10 * i}, 100%, 50%)`
+//     ctx.fillRect((canvas.width/10)*i, 0, 49, canvas.height);
+//     }       //code for background colored rectangles
+//
+    ctx.fillStyle = 'red';
     ctx.beginPath();
-    ctx.arc(canvas.width/2, canvas.height, 100, 0, 2 * Math.PI);
+    ctx.arc(canvas.width/2, canvas.height/2, 100, 0, 2 * Math.PI);
     ctx.fill();
 }
 
