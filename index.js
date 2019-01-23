@@ -154,23 +154,32 @@ function drawBackground(){
 //     }       //code for background colored rectangles
 //
 
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // ctx.fillStyle = 'white';
+    // ctx.fillRect(0, 0, canvas.width, canvas.height);
+    //
+    // ctx.fillStyle = 'red';
+    // ctx.beginPath();
+    // ctx.arc(canvas.width/2, canvas.height/2, 150, 0, 2 * Math.PI);
+    // ctx.fill();
+    //
+    // ctx.fillStyle = 'white';
+    // ctx.beginPath();
+    // ctx.arc(canvas.width/2, canvas.height/2, 100, 0, 2 * Math.PI);
+    // ctx.fill();
+    //
+    // ctx.fillStyle = 'red';
+    // ctx.beginPath();
+    // ctx.arc(canvas.width/2, canvas.height/2, 50, 0, 2 * Math.PI);
+    // ctx.fill(); //target logo
 
-    ctx.fillStyle = 'red';
-    ctx.beginPath();
-    ctx.arc(canvas.width/2, canvas.height/2, 150, 0, 2 * Math.PI);
-    ctx.fill();
+    for (let c = 0; c < 10; c++){
+        ctx.beginPath();
+        ctx.fillStyle = `hsl(${360 / 10 * c}, 100%, 50%)`
+        ctx.arc(canvas.width/2, canvas.height, 200-(c*20), 0, 2 * Math.PI);
+        ctx.fill();
+        }
 
-    ctx.fillStyle = 'white';
-    ctx.beginPath();
-    ctx.arc(canvas.width/2, canvas.height/2, 100, 0, 2 * Math.PI);
-    ctx.fill();
 
-    ctx.fillStyle = 'red';
-    ctx.beginPath();
-    ctx.arc(canvas.width/2, canvas.height/2, 50, 0, 2 * Math.PI);
-    ctx.fill();
 }
 
 function gradientBricks(bW, bH, x, y){
