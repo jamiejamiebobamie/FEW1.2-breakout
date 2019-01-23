@@ -87,31 +87,25 @@ function collisionDetection() {
     }
 }
 
-// function drawScore() {
-//     ctx.font = "16px Arial";
-//     ctx.fillStyle = "#e8a668";
-//     ctx.fillText("Score: "+score, 8, 20);
-// }
+function drawScore() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#e8a668";
+    ctx.fillText("Score: "+score, 8, 20);
+}
 
-let points = new Score()
-let health = new Lives()
-let player = new Paddle()
-let circle = new Ball()
+function drawLives() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "#e8a668";
+    ctx.fillText("Lives: "+lives, canvas.width-65, 20);
+}
 
-
-// function drawLives() {
-//     ctx.font = "16px Arial";
-//     ctx.fillStyle = "#e8a668";
-//     ctx.fillText("Lives: "+lives, canvas.width-65, 20);
-// }
-
-// function drawPaddle() {
-//     ctx.beginPath();
-//     ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-//     ctx.fillStyle = "#008000";
-//     ctx.fill();
-//     ctx.closePath();
-// }
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
+    ctx.fillStyle = "#008000";
+    ctx.fill();
+    ctx.closePath();
+}
 
 function drawBricks() {
     for(let c=0; c<brickColumnCount; c++) {
@@ -216,18 +210,13 @@ function draw() {
     }
 
 
-    // drawBackground();
-    // drawBall();
-    // drawBricks();
-    // drawPaddle();
-    // drawScore();
-    // drawLives();
+    drawBackground();
+    drawBall();
+    drawBricks();
+    drawPaddle();
+    drawScore();
+    drawLives();
     collisionDetection();
-
-    points.render()
-    health.render()
-    player.render()
-    circle.render()
 
     if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
         dx = -dx;

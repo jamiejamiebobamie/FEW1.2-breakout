@@ -9,12 +9,12 @@
 //         render()
 
 class Lives {
- constructor(lives, x, y, color="#e8a668", font="16px Arial") {
+ constructor(lives=3, x=canvas.width-65, y=20, color="#e8a668", font="16px Arial") {
      this.lives = lives;
      this.x = x;
      this.y = y;
      this.color = color;
-     this.font = font
+     this.font = font;
  }
 
  render(ctx) {

@@ -9,7 +9,7 @@
 //         render()
 
 class Ball {
- constructor(radius, color = "#0095DD", x = 0, y = 0) {
+ constructor(radius=10, color = "#0095DD", x = 0, y = 0) {
    this.radius = radius;
    this.color = color;
    this.x = x;
@@ -23,5 +23,5 @@ class Ball {
    ctx.fill();
    ctx.closePath();
  }
- 
+
 }
