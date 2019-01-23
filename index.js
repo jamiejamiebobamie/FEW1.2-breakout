@@ -153,9 +153,23 @@ function drawBackground(){
 //     ctx.fillRect((canvas.width/10)*i, 0, 49, canvas.height);
 //     }       //code for background colored rectangles
 //
+
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
     ctx.fillStyle = 'red';
     ctx.beginPath();
+    ctx.arc(canvas.width/2, canvas.height/2, 150, 0, 2 * Math.PI);
+    ctx.fill();
+
+    ctx.fillStyle = 'white';
+    ctx.beginPath();
     ctx.arc(canvas.width/2, canvas.height/2, 100, 0, 2 * Math.PI);
+    ctx.fill();
+
+    ctx.fillStyle = 'red';
+    ctx.beginPath();
+    ctx.arc(canvas.width/2, canvas.height/2, 50, 0, 2 * Math.PI);
     ctx.fill();
 }
 
