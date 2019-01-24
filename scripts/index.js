@@ -5,8 +5,8 @@ document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 document.addEventListener('mousemove', mouseMoveHandler, false);
 
-let dx = 2;
-let dy = -2;
+let dx = 5;
+let dy = -5;
 
 let rightPressed = false;
 let leftPressed = false;
@@ -104,8 +104,8 @@ function draw() {
         else {
             circle.x = canvas.width/2;
             circle.y = canvas.height-30;
-            dx = 2;
-            dy = -2;
+            dx = 5;
+            dy = -5;
             player.x = (canvas.width-player.width)/2;
         }
     }
