@@ -1,12 +1,62 @@
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 
+let newGame = new Game()
+
+
+
+// document.addEventListener('keydown', newGame.keyDownHandler, false);
+// document.addEventListener('keyup', newGame.keyUpHandler, false);
+// document.addEventListener('mousemove', newGame.mouseMoveHandler, false);
+
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 document.addEventListener('mousemove', mouseMoveHandler, false);
 
-let dx = 5;
-let dy = -5;
+
+let rightPressed = false;
+let leftPressed = false;
+
+function keyDownHandler(e) {
+    if(e.key == 'Right' || e.key == 'ArrowRight') {
+        rightPressed = true;
+    }
+    else if(e.key == 'Left' || e.key == 'ArrowLeft') {
+        leftPressed = true;
+    }
+}
+
+function keyUpHandler(e) {
+    if(e.key == 'Right' || e.key == 'ArrowRight') {
+        rightPressed = false;
+    }
+    else if(e.key == 'Left' || e.key == 'ArrowLeft') {
+        leftPressed = false;
+    }
+}
+
+function mouseMoveHandler(e) {
+    let relativeX = e.clientX - canvas.offsetLeft;
+    if(relativeX > 0 && relativeX < canvas.width) {
+        newGame.player.x = relativeX - newGame.player.width/2;
+    }
+}
+
+
+// newGame.kewDownHandler(e)
+// newGame.kewUpandler(e)
+// newGame.mouseMoveHandler(e)
+//
+// newGame.collisionDetection();
+// newGame.render(ctx);
+
+
+
+
+
+
+let dx = 4;
+let dy = -4;
 
 let rightPressed = false;
 let leftPressed = false;
@@ -104,8 +154,8 @@ function draw() {
         else {
             circle.x = canvas.width/2;
             circle.y = canvas.height-30;
-            dx = 5;
-            dy = -5;
+            dx = 4;
+            dy = -4;
             player.x = (canvas.width-player.width)/2;
         }
     }
