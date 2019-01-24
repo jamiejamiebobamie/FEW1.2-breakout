@@ -1,5 +1,5 @@
 class Lives {
- constructor(lives=3, x=canvas.width-65, y=20, color='#e8a668', font='16px Arial') {
+ constructor(lives = 3, x = canvas.width-65, y = 20, color = '#e8a668', font = '16px Arial') {
      this.lives = lives;
      this.x = x;
      this.y = y;
@@ -10,7 +10,7 @@ class Lives {
  render(ctx) {
      ctx.font = this.font;
      ctx.fillStyle = this.color;
-     ctx.fillText('Lives: '+this.lives, canvas.width-65, 20);
+     ctx.fillText('Lives: ' + this.lives, canvas.width-65, 20);
  }
 
 }

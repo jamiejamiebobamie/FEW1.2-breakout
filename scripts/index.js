@@ -1,15 +1,15 @@
-var canvas = document.getElementById('myCanvas');
-var ctx = canvas.getContext('2d');
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
 
 document.addEventListener('keydown', keyDownHandler, false);
 document.addEventListener('keyup', keyUpHandler, false);
 document.addEventListener('mousemove', mouseMoveHandler, false);
 
-var dx = 2;
-var dy = -2;
+let dx = 2;
+let dy = -2;
 
-var rightPressed = false;
-var leftPressed = false;
+let rightPressed = false;
+let leftPressed = false;
 
 function keyDownHandler(e) {
     if(e.key == 'Right' || e.key == 'ArrowRight') {

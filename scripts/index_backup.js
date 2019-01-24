@@ -1,3 +1,5 @@
+//the index.js file before objects were turned into individual classes.
+
 var canvas = document.getElementById('myCanvas');
 var ctx = canvas.getContext("2d");
 
