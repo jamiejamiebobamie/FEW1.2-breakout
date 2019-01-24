@@ -1,5 +1,5 @@
 class Score {
- constructor(x=8, y=20, color="#e8a668", score=0, font="16px Arial") {
+ constructor(x=8, y=20, color='#e8a668', score=0, font="16px Arial") {
      this.x = x;
      this.y = y;
      this.color = color;
@@ -10,6 +10,6 @@ class Score {
  render(ctx) {
      ctx.font = this.font;
      ctx.fillStyle = this.color;
-     ctx.fillText("Score: "+this.score, this.x, this.y);
+     ctx.fillText('Score: '+this.score, this.x, this.y);
  }
 }

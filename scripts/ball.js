@@ -1,5 +1,5 @@
 class Ball {
- constructor(radius=10, color = "#0095DD", x = 220, y = 220) {
+ constructor(radius=10, color = '#0095DD', x = 220, y = 220) {
    this.radius = radius;
    this.color = color;
    this.x = x;

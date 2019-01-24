@@ -7,6 +7,10 @@ module.exports = {
     "parserOptions": {
         "ecmaVersion": 5
     },
+  "globals": {
+    "document": true,
+    "window": true
+},
     "rules": {
         "indent": [
             "error",
