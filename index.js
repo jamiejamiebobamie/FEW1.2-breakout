@@ -64,7 +64,8 @@ function keyUpHandler(e) {
 function mouseMoveHandler(e) {
     var relativeX = e.clientX - canvas.offsetLeft;
     if(relativeX > 0 && relativeX < canvas.width) {
-        paddleX = relativeX - paddleWidth/2;
+        player.x = relativeX - player.width/2;
+        // paddleX = relativeX - paddleWidth/2;
     }
 }
 
@@ -73,7 +74,7 @@ function collisionDetection() {
         for(var r=0; r<brickRowCount; r++) {
             var b = bricks[c][r];
             if(b.status == 1){
-                if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+                if(circle.x > b.x && circle.x < b.x+brickWidth && circle.y > b.y && circle.y < b.y+brickHeight) {
                     dy = -dy;
                     b.status = 0;
                     score++;
@@ -136,13 +137,13 @@ function drawBricks() {
     }
 }
 
-function drawBall(){
-    ctx.beginPath();
-    ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-    ctx.fillStyle = "#773f3f";
-    ctx.fill();
-    ctx.closePath();
-}
+// function drawBall(){
+//     ctx.beginPath();
+//     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
+//     ctx.fillStyle = "#773f3f";
+//     ctx.fill();
+//     ctx.closePath();
+// }
 
 function drawBackground(){
 // // Create gradient
@@ -208,12 +209,24 @@ function draw() {
     // ctx.fillRect(x, y, width, height);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    if(rightPressed && paddleX < canvas.width-paddleWidth) {
-        paddleX += 7;
+    if(rightPressed && player.x < canvas.width-player.width) {
+        // paddleX += 7;
+        player.x += 7
     }
-    else if(leftPressed && paddleX > 0) {
-        paddleX -= 7;
+    else if(leftPressed && player.x > 0) {
+        // paddleX -= 7;
+        player.x -= 7;
     }
+
+
+    // if(rightPressed && paddleX < canvas.width-paddle.width) {
+    //     // paddleX += 7;
+    //     player.x += 7
+    // }
+    // else if(leftPressed && paddleX > 0) {
+    //     paddleX -= 7;
+    //     player.y -= 7;
+    // }
 
 
     // drawBackground();
@@ -224,18 +237,18 @@ function draw() {
     // drawLives();
     collisionDetection();
 
-    points.render()
-    health.render()
-    player.render()
-    circle.render()
+    points.render(ctx)
+    health.render(ctx)
+    player.render(ctx)
+    circle.render(ctx)
 
-    if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+    if(circle.x + dx > canvas.width-circle.radius || circle.x + dx < circle.radius) {
         dx = -dx;
     }
-    if(y + dy < ballRadius) {
+    if(circle.y + dy < circle.radius) {
     dy = -dy;
-} else if(y + dy > canvas.height-ballRadius) {
-    if(x > paddleX && x < paddleX + paddleWidth) {
+} else if(circle.y + dy > canvas.height-circle.radius) {
+    if(circle.x > player.x && circle.x <player.x + player.width) {
         dy = -dy;
     }
     else {
@@ -245,16 +258,16 @@ function draw() {
             document.location.reload();
         }
         else {
-            x = canvas.width/2;
-            y = canvas.height-30;
+            circle.x = canvas.width/2;
+            circle.y = canvas.height-30;
             dx = 2;
             dy = -2;
-            paddleX = (canvas.width-paddleWidth)/2;
+            player.x = (canvas.width-player.width)/2;
         }
     }
 }
-    x += dx;
-    y += dy;
+    circle.x += dx;
+    circle.y += dy;
     requestAnimationFrame(draw);
 }
 
