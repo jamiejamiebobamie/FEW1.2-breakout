@@ -30,16 +30,16 @@ function keyUpHandler(e) {
 }
 
 function mouseMoveHandler(e) {
-    var relativeX = e.clientX - canvas.offsetLeft;
+    let relativeX = e.clientX - canvas.offsetLeft;
     if(relativeX > 0 && relativeX < canvas.width) {
         player.x = relativeX - player.width/2;
     }
 }
 
 function collisionDetection() {
-    for(var c=0; c<targets.columnCount; c++) {
-        for(var r=0; r<targets.rowCount; r++) {
-            var b = targets.bricks[c][r];
+    for(let c=0; c<targets.columnCount; c++) {
+        for(let r=0; r<targets.rowCount; r++) {
+            let b = targets.bricks[c][r];
             if(b.status == 1){
                 if(circle.x > b.x && circle.x < b.x+b.width && circle.y > b.y && circle.y < b.y+b.height) {
                     dy = -dy;
