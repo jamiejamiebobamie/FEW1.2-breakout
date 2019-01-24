@@ -9,7 +9,7 @@
 //         render()
 
 class Paddle {
- constructor(x=(canvas.width-paddleWidth)/2, color = "#008000", width=75, height=10) {
+ constructor(x=canvas.width/2, color = "#008000", width=75, height=10) {
      this.x = x;
      this.color = color;
      this.width = width;

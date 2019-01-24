@@ -5,39 +5,39 @@ document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
 document.addEventListener("mousemove", mouseMoveHandler, false);
 
-var x = canvas.width/2;
-var y = canvas.height-30;
-
-var score = 0;
-var lives = 3;
-
+// var x = canvas.width/2;
+// var y = canvas.height-30;
+//
+// var score = 0;
+// var lives = 3;
+//
 var dx = 2;
 var dy = -2;
-
-var ballRadius = 10;
-
-var paddleHeight = 10;
-var paddleWidth = 75;
-var paddleX = (canvas.width-paddleWidth)/2;
+//
+// var ballRadius = 10;
+//
+// var paddleHeight = 10;
+// var paddleWidth = 75;
+// var paddleX = (canvas.width-paddleWidth)/2;
 
 var rightPressed = false;
 var leftPressed = false;
 
-var brickRowCount = 3;
-var brickColumnCount = 5;
-var brickWidth = 75;
-var brickHeight = 20;
-var brickPadding = 10;
-var brickOffsetTop = 30;
-var brickOffsetLeft = 30;
-
-var bricks = [];
-for(var c=0; c<brickColumnCount; c++) {
-    bricks[c] = [];
-    for(var r=0; r<brickRowCount; r++) {
-        bricks[c][r] = { x: 0, y: 0, status: 1 };
-    }
-}
+// var brickRowCount = 3;
+// var brickColumnCount = 5;
+// var brickWidth = 75;
+// var brickHeight = 20;
+// var brickPadding = 10;
+// var brickOffsetTop = 30;
+// var brickOffsetLeft = 30;
+//
+// var bricks = [];
+// for(var c=0; c<brickColumnCount; c++) {
+//     bricks[c] = [];
+//     for(var r=0; r<brickRowCount; r++) {
+//         bricks[c][r] = { x: 0, y: 0, status: 1 };
+//     }
+// }
 //
 // var grd = ctx.createLinearGradient(startX, startY, endX, endY);
 // grd.addColorStop(0, 'red');   // Places a color at the start
@@ -70,15 +70,15 @@ function mouseMoveHandler(e) {
 }
 
 function collisionDetection() {
-    for(var c=0; c<brickColumnCount; c++) {
-        for(var r=0; r<brickRowCount; r++) {
-            var b = bricks[c][r];
+    for(var c=0; c<targets.columnCount; c++) {
+        for(var r=0; r<targets.rowCount; r++) {
+            var b = targets.bricks[c][r];
             if(b.status == 1){
-                if(circle.x > b.x && circle.x < b.x+brickWidth && circle.y > b.y && circle.y < b.y+brickHeight) {
+                if(circle.x > b.x && circle.x < b.x+b.width && circle.y > b.y && circle.y < b.y+b.height) {
                     dy = -dy;
                     b.status = 0;
-                    score++;
-                    if(score == brickRowCount*brickColumnCount) {
+                    points.score++;
+                    if(points.score == targets.rowCount*targets.columnCount) {
                         alert("YOU WIN, CONGRATULATIONS!");
                         document.location.reload();
                     }
@@ -98,6 +98,9 @@ let points = new Score()
 let health = new Lives()
 let player = new Paddle()
 let circle = new Ball()
+let back = new Background()
+let targets = new Bricks()
+targets.make()
 
 
 // function drawLives() {
@@ -114,28 +117,28 @@ let circle = new Ball()
 //     ctx.closePath();
 // }
 
-function drawBricks() {
-    for(let c=0; c<brickColumnCount; c++) {
-        for(let r=0; r<brickRowCount; r++) {
-            if(bricks[c][r].status == 1) {
-                var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
-                var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop; //ReferenceError: Cannot access uninitialized variable.
-                bricks[c][r].x = brickX;
-                bricks[c][r].y = brickY;
-                ctx.beginPath();
-                ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                ctx.fillStyle = gradientBricks(brickWidth, brickHeight, brickX, brickY)
-                // ctx.fillStyle = '#00FFFF';
-                // let red = 255 * (c / r);
-                // let green = 255 * (r / c);
-                // let blue = (c * r);
-                // ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;//not working...
-                ctx.fill(); //https://github.com/Make-School-Courses/FEW-1.2-JavaScript-Foundations/tree/master/class-02
-                ctx.closePath();
-            }
-        }
-    }
-}
+// function drawBricks() {
+//     for(let c=0; c<brickColumnCount; c++) {
+//         for(let r=0; r<brickRowCount; r++) {
+//             if(bricks[c][r].status == 1) {
+//                 var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
+//                 var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop; //ReferenceError: Cannot access uninitialized variable.
+//                 bricks[c][r].x = brickX;
+//                 bricks[c][r].y = brickY;
+//                 ctx.beginPath();
+//                 ctx.rect(brickX, brickY, brickWidth, brickHeight);
+//                 ctx.fillStyle = gradientBricks(brickWidth, brickHeight, brickX, brickY)
+//                 // ctx.fillStyle = '#00FFFF';
+//                 // let red = 255 * (c / r);
+//                 // let green = 255 * (r / c);
+//                 // let blue = (c * r);
+//                 // ctx.fillStyle = `rgb(${red}, ${green}, ${blue})`;//not working...
+//                 ctx.fill(); //https://github.com/Make-School-Courses/FEW-1.2-JavaScript-Foundations/tree/master/class-02
+//                 ctx.closePath();
+//             }
+//         }
+//     }
+// }
 
 // function drawBall(){
 //     ctx.beginPath();
@@ -145,76 +148,73 @@ function drawBricks() {
 //     ctx.closePath();
 // }
 
-function drawBackground(){
+// function drawBackground(){
+// // // Create gradient
+// // var grd = ctx.createLinearGradient(0, 0, 0, canvas.height);
+// // grd.addColorStop(0, "#45a5aa");
+// // grd.addColorStop(1, "#4f7b8a");
+// //
+// // // Fill with gradient
+// // ctx.fillStyle = grd;
+// // ctx.fillRect(0, 0, canvas.width, canvas.height); //code for background gradient
+//
+// // for (let i = 0; i < 10; i++){
+// //     ctx.fillStyle = `hsl(${360 / 10 * i}, 100%, 50%)`
+// //     ctx.fillRect((canvas.width/10)*i, 0, 49, canvas.height);
+// //     }       //code for background colored rectangles
+// //
+//
+//     // ctx.fillStyle = 'white';
+//     // ctx.fillRect(0, 0, canvas.width, canvas.height);
+//     //
+//     // ctx.fillStyle = 'red';
+//     // ctx.beginPath();
+//     // ctx.arc(canvas.width/2, canvas.height/2, 150, 0, 2 * Math.PI);
+//     // ctx.fill();
+//     //
+//     // ctx.fillStyle = 'white';
+//     // ctx.beginPath();
+//     // ctx.arc(canvas.width/2, canvas.height/2, 100, 0, 2 * Math.PI);
+//     // ctx.fill();
+//     //
+//     // ctx.fillStyle = 'red';
+//     // ctx.beginPath();
+//     // ctx.arc(canvas.width/2, canvas.height/2, 50, 0, 2 * Math.PI);
+//     // ctx.fill(); //target logo
+//
+//     for (let i = 0; i < 10; i++){
+//         ctx.fillStyle = `hsl(${360 / 10 * i}, 100%, 50%)`
+//         ctx.fillRect((canvas.width/10)*i, 0, 49, canvas.height);
+//         }       //code for background colored rectangles
+//
+//     for (let c = 0; c < 10; c++){
+//         ctx.beginPath();
+//         ctx.fillStyle = `hsl(${360 / 10 * c}, 100%, 50%)`
+//         ctx.arc(canvas.width/2, canvas.height, 200-(c*20), 0, 2 * Math.PI);
+//         ctx.fill();
+//         }
+// }
+//
+// function gradientBricks(bW, bH, x, y){
 // // Create gradient
-// var grd = ctx.createLinearGradient(0, 0, 0, canvas.height);
-// grd.addColorStop(0, "#45a5aa");
-// grd.addColorStop(1, "#4f7b8a");
+// var grd = ctx.createLinearGradient(0, 0, canvas.width, 0);
+// grd.addColorStop(0, "#e8a668");
+// grd.addColorStop(1, "#cf5d3a");
 //
 // // Fill with gradient
-// ctx.fillStyle = grd;
-// ctx.fillRect(0, 0, canvas.width, canvas.height); //code for background gradient
-
-// for (let i = 0; i < 10; i++){
-//     ctx.fillStyle = `hsl(${360 / 10 * i}, 100%, 50%)`
-//     ctx.fillRect((canvas.width/10)*i, 0, 49, canvas.height);
-//     }       //code for background colored rectangles
-//
-
-    // ctx.fillStyle = 'white';
-    // ctx.fillRect(0, 0, canvas.width, canvas.height);
-    //
-    // ctx.fillStyle = 'red';
-    // ctx.beginPath();
-    // ctx.arc(canvas.width/2, canvas.height/2, 150, 0, 2 * Math.PI);
-    // ctx.fill();
-    //
-    // ctx.fillStyle = 'white';
-    // ctx.beginPath();
-    // ctx.arc(canvas.width/2, canvas.height/2, 100, 0, 2 * Math.PI);
-    // ctx.fill();
-    //
-    // ctx.fillStyle = 'red';
-    // ctx.beginPath();
-    // ctx.arc(canvas.width/2, canvas.height/2, 50, 0, 2 * Math.PI);
-    // ctx.fill(); //target logo
-
-    for (let i = 0; i < 10; i++){
-        ctx.fillStyle = `hsl(${360 / 10 * i}, 100%, 50%)`
-        ctx.fillRect((canvas.width/10)*i, 0, 49, canvas.height);
-        }       //code for background colored rectangles
-
-    for (let c = 0; c < 10; c++){
-        ctx.beginPath();
-        ctx.fillStyle = `hsl(${360 / 10 * c}, 100%, 50%)`
-        ctx.arc(canvas.width/2, canvas.height, 200-(c*20), 0, 2 * Math.PI);
-        ctx.fill();
-        }
-}
-
-function gradientBricks(bW, bH, x, y){
-// Create gradient
-var grd = ctx.createLinearGradient(0, 0, canvas.width, 0);
-grd.addColorStop(0, "#e8a668");
-grd.addColorStop(1, "#cf5d3a");
-
-// Fill with gradient
-// ctx.fillStyle = grd;
-// ctx.fillRect(x, y, bW, bH);
-return grd;
-}
+// // ctx.fillStyle = grd;
+// // ctx.fillRect(x, y, bW, bH);
+// return grd;
+// }
 
 function draw() {
-    // ctx.fillStyle = grd;
-    // ctx.fillRect(x, y, width, height);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+
     if(rightPressed && player.x < canvas.width-player.width) {
-        // paddleX += 7;
         player.x += 7
     }
     else if(leftPressed && player.x > 0) {
-        // paddleX -= 7;
         player.x -= 7;
     }
 
@@ -237,10 +237,15 @@ function draw() {
     // drawLives();
     collisionDetection();
 
-    points.render(ctx)
-    health.render(ctx)
-    player.render(ctx)
-    circle.render(ctx)
+    back.render(ctx);
+    circle.render(ctx);
+    targets.render(ctx);
+    player.render(ctx);
+    points.render(ctx);
+    health.render(ctx);
+
+
+
 
     if(circle.x + dx > canvas.width-circle.radius || circle.x + dx < circle.radius) {
         dx = -dx;
@@ -252,8 +257,8 @@ function draw() {
         dy = -dy;
     }
     else {
-        lives--;
-        if(!lives) {
+        health.lives--;
+        if(!health.lives) {
             alert("GAME OVER");
             document.location.reload();
         }
