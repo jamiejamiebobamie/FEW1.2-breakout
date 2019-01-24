@@ -1,13 +1,3 @@
-//
-// Define a class for Ball
-//     Properties
-//         radius
-//         color
-//         x
-//         y
-//     Methods
-//         render()
-
 class Ball {
  constructor(radius=10, color = "#0095DD", x = 220, y = 220) {
    this.radius = radius;

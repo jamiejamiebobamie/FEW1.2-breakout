@@ -1,13 +1,3 @@
-// Define a class for Lives
-//     Properties
-//         x
-//         y
-//         color
-//         lives
-//         font
-//     Methods
-//         render()
-
 class Lives {
  constructor(lives=3, x=canvas.width-65, y=20, color="#e8a668", font="16px Arial") {
      this.lives = lives;

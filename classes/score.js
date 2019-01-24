@@ -1,13 +1,3 @@
-// Define a class for Score
-//     Properties
-//         x
-//         y
-//         color
-//         score
-//         font
-//     Methods
-//         render()
-
 class Score {
  constructor(x=8, y=20, color="#e8a668", score=0, font="16px Arial") {
      this.x = x;

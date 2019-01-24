@@ -1,9 +1,3 @@
-// Define a class for Background
-//     Properties (The Background Object is responsible for rendering the background image. The properties are up to you, and might be as simple as a color)
-//         ?
-//     Methods
-//         render()
-
 class Background {
  constructor(numberOfRainbows=10) {
    this.num = numberOfRainbows;

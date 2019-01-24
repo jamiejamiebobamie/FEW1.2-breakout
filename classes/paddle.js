@@ -1,13 +1,3 @@
-// Define a class for Paddle
-//     Properties
-//         x
-//         y
-//         color
-//         width
-//         height
-//     Methods
-//         render()
-
 class Paddle {
  constructor(x=canvas.width/2, color = "#008000", width=75, height=10) {
      this.x = x;
